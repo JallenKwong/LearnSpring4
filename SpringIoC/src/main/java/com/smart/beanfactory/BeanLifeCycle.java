@@ -17,7 +17,7 @@ public class BeanLifeCycle {
        //①下面两句装载配置文件并启动容器
  	   Resource res = new ClassPathResource("com/smart/beanfactory/beans.xml");
 
-       BeanFactory bf= new DefaultListableBeanFactory();
+       BeanFactory bf = new DefaultListableBeanFactory();
        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader((DefaultListableBeanFactory)bf);
        reader.loadBeanDefinitions(res);
 
@@ -27,6 +27,9 @@ public class BeanLifeCycle {
        //③向容器中注册MyInstantiationAwareBeanPostProcessor后处理器
        ((ConfigurableBeanFactory)bf).addBeanPostProcessor(
                new MyInstantiationAwareBeanPostProcessor());
+       
+       //System.out.println("---------");
+       
        //④第一次从容器中获取car，将触发容器实例化该Bean，这将引发Bean生命周期方法的调用。
        Car car1 = (Car)bf.getBean("car");
        car1.introduce();
@@ -39,7 +42,7 @@ public class BeanLifeCycle {
        System.out.println("car1==car2:"+(car1==car2));
        //⑦关闭容器
        ((DefaultListableBeanFactory)bf).destroySingletons();
-
+ 
     }
 	public static void main(String[] args) {
 		LifeCycleInBeanFactory();

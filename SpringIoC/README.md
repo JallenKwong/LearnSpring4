@@ -177,3 +177,61 @@ WebApplicationContext通过配置web.xml启动，启动方式有两个
 
 ## Bean的生命周期 ##
 
+![](image/bean-life-cycle.png)
+
+方法大致划分4类
+
+- Bean自身的方法：如
+	- 调用Bean构造函数实例化Bean
+	- 调用Setter设置Bean的属性值
+	- 通过<bean>的init-method和destroy-method所指定的方法
+- Bean级生命周期接口方法：如
+	- BeanNameAware
+	- BeanFactoryAware
+	- InitializingBean
+	- DisposableBean，这些接口方法由Bean类直接实现
+- 容器级生命周期接口方法，由：
+	- InstantiationAwareBeanPostProcessor实例化 意识 Bean 后 处理器
+	- BeanPostProcessor 实现
+
+后处理器接口一般不由Bean实现，独立于Bean，实现类以容器附加装置的形式注册到Spring容器中，通过接口反射为Spring容器扫描识别。
+
+当Spring容器创建任何Bean的时候，这些后处理器都会发生作用，所以这些后处理器的影响是全局性。
+
+对于编写基于Spring之上的扩展插件或子项目，了解这BeanFactory的生命周期是极有裨益的
+
+---
+
+实例程序
+
+[实现BeanFactoryAware, BeanNameAware, InitializingBean, DisposableBean接口的Car](src/main/java/com/smart/Car.java)
+
+[InstantiationAwareBeanPostProcessor的实现](src/main/java/com/smart/beanfactory/MyInstantiationAwareBeanPostProcessor.java)
+[BeanLifeCycle展现](src/main/java/com/smart/beanfactory/BeanLifeCycle.java)
+
+### ApplicationContext中Bean的生命周期 ###
+
+![](image/bean-life-cycle2.png)
+
+与BeanFactory不同之处，
+
+1. 实现ApplicationContextWare接口
+2. 若配置文件中声明了工厂后处理器接口BeanFactoryPostProcessor的实现类，则应用上下文在装载配置文件之后**自动**初始化Bean实例化之前将调用BeanFactoryPostProcessor的实现类
+
+**最大不同之处**
+
+**ApplicationContext**会利用Java反射机制自动识别出配置文件中心定义的BeanProcessor，InstantiationAwareBeanPostProcessor和BeanFactoryPostProcessor，并自动将它们注册到应用的上下文。
+
+Bean需要在代码中通过手工调用addBeanPostProcessor()方法进行注册。
+
+这也是为什么在应用开发是普遍使用ApplicationContext而很少使用BeanFactory的原因之一
+
+---
+
+工厂后处理器用法
+
+[自定义BeanFactoryPostProcessor](src/main/java/com/smart/context/MyBeanFactoryPostProcessor.java)
+
+[配置bean.xml](src/main/resources/com/smart/beanfactory/beans2.xml)
+
+[运行类](src/main/java/com/smart/context/ApplicationContextTest2.java)
