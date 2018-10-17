@@ -5,9 +5,9 @@
 
 [Spring Boot](#Spring Boot)
 
-[IoC容器](#ioc容器)
+[IoC容器](SpringIoC/)
 
-[](#)
+[在IoC容器中装配Bean](SpringBean/)
 
 [](#)
 
