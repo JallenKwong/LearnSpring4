@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+           http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd">
+	<aop:config proxy-target-class="true">
+	
+		<!-- Advisor是Spring中切面概念的 对应物，是切点和增强的复合体，不过
+		它仅包含一个切点和一个增强。在AspectJ中没有对应的等价物，在AOP Schema配置样式中，可以通过<aop:advisor>配置一个Advisor-->
+	    <aop:advisor advice-ref="testAdvice"  
+	    	pointcut="execution(* com..*.Waiter.greetTo(..))"/>  
+		
+		<aop:aspect ref="adviceMethods">
+		
+			<aop:before method="preGreeting"
+				pointcut="target(com.smart.NaiveWaiter) and args(name)"
+				arg-names="name" />
+		
+			<aop:after-returning method="afterReturning"
+				pointcut="target(com.smart.SmartSeller)" returning="retVal" />
+		
+			<aop:around method="aroundMethod"
+				pointcut="execution(* serveTo(..)) and within(com.smart.Waiter)" />
+		
+			<aop:after-throwing method="afterThrowingMethod"
+				pointcut="target(com.smart.SmartSeller) and execution(* checkBill(..))"
+				throwing="iae" />
+		
+			<aop:after method="afterMethod"
+				pointcut="execution(* com..*.Waiter.greetTo(..))" />
+		
+			<aop:declare-parents
+				implement-interface="com.smart.Seller"
+				default-impl="com.smart.SmartSeller"
+				types-matching="com.smart.Waiter+" />
+        
+        	<!-- 绑定连接点信息 -->
+            <aop:before method="bindParams" 
+                   pointcut="target(com.smart.NaiveWaiter) and args(name,num,..)"/>
+		</aop:aspect>
+	</aop:config>
+	
+	<!-- Spring Advice增强 -->
+    <bean id="testAdvice" class="com.smart.schema.TestBeforeAdvice"/>
+	
+	<!-- 增强方法 -->
+	<bean id="adviceMethods" class="com.smart.schema.AdviceMethods" />
+	
+	<bean id="naiveWaiter" class="com.smart.NaiveWaiter" />
+	<bean id="naughtyWaiter" class="com.smart.NaughtyWaiter" />
+	<bean id="seller" class="com.smart.SmartSeller" />
+</beans>
