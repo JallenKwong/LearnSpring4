@@ -4,13 +4,13 @@
 
 Matcher|Method
 ---|---
-[Object](#)|hasToString<br/>typeCompatibleWith
-[Bean](#)|hasProperty<br/>samePropertyValuesAs<br/>
-[Collection](#)|---List---<br/>empty<br/>hasSize<br/>containsInAnyOrder<br/>contains<br/>---Array---<br/>arrayWithSize<br/>hasItemInArray<br/>isOneOf<br/>isIn<br/>arrayContainingInAnyOrder<br/>arrayContaining<br/>---Map---<br/>hasKey<br/>hasValue<br/>hasEntry<br/>
-[Number](#)|greaterThan<br/>greaterThanOrEqualTo<br/>lessThan<br/>lessThanOrEqualTo<br/>closeTo
-[Text](#)|isEmptyString<br/>isEmptyOrNullString<br/>equalToIgnoringWhiteSpace<br/>stringContainsInOrder
-[Core](#)|is<br/>not<br/>containsString<br/>endsWith<br/>startsWith<br/>sameInstance<br/>instanceOf<br/>everyItem<br/>notNullValue<br/>anyOf<br/>allOf
-[Custom](#)|<br/>
+[Object](#the-object-matcher)|hasToString<br/>typeCompatibleWith
+[Bean](#the-bean-matcher)|hasProperty<br/>samePropertyValuesAs<br/>
+[Collection](#the-collection-matcher)|---List---<br/>empty<br/>hasSize<br/>containsInAnyOrder<br/>contains<br/>---Array---<br/>arrayWithSize<br/>hasItemInArray<br/>isOneOf<br/>isIn<br/>arrayContainingInAnyOrder<br/>arrayContaining<br/>---Map---<br/>hasKey<br/>hasValue<br/>hasEntry<br/>
+[Number](#the-number-matcher)|greaterThan<br/>greaterThanOrEqualTo<br/>lessThan<br/>lessThanOrEqualTo<br/>closeTo
+[Text](#the-text-matcher)|isEmptyString<br/>isEmptyOrNullString<br/>equalToIgnoringWhiteSpace<br/>stringContainsInOrder
+[Core](#the-core-api)|is<br/>not<br/>containsString<br/>endsWith<br/>startsWith<br/>sameInstance<br/>instanceOf<br/>everyItem<br/>notNullValue<br/>anyOf<br/>allOf
+[Custom](#a-custom-matcher)|<br/>
 
 
 ## Overview ##
