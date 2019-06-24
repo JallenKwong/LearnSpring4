@@ -14,9 +14,9 @@
 
 [2.5.示例：简单条件查询](#示例简单条件查询)
 
-[2.6.示例：关联查询和@Query查询](#示例关联查询和@query查询)
+[2.6.示例：关联查询和@Query查询](#示例关联查询和query查询)
 
-[2.7.示例：@NamedQuery查询](#示例@namedquery查询)
+[2.7.示例：@NamedQuery查询](#示例namedquery查询)
 
 [2.8.示例：Specification查询](#示例specification查询)
 
